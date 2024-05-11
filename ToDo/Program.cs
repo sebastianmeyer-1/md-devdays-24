@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,12 +18,14 @@ if (app.Environment.IsDevelopment())
 
 app.MapGet("/todos", () =>
 {
+    Console.WriteLine($"{DateTime.Now.ToUniversalTime()}: All Todos requested");
     return todoContext.Todos;
 })
 .WithName("GetTodos");
 
 app.MapPost("/todo", ([FromBody]TodoItem todoItem) =>
 {
+    Console.WriteLine($"{DateTime.Now.ToUniversalTime()}: New Todo arrived. {JsonSerializer.Serialize(todoItem)}");
     todoContext.Todos.Add(todoItem);
     todoContext.SaveChanges();
 });

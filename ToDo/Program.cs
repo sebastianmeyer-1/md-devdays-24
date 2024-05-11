@@ -6,7 +6,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
 var app = builder.Build();
 var todoContext = new TodoContext();
 
@@ -29,8 +28,6 @@ app.MapPost("/todo", ([FromBody]TodoItem todoItem) =>
 });
 
 app.Run();
-
-
 
 public class TodoContext : DbContext
 {
